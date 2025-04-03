@@ -2,11 +2,9 @@ package ArraysPrac;
 
 import java.util.Scanner;
 
-public class SortAscDescArray {
+public class SortArray {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
-        // Input the size of the array
         System.out.print("Enter the size of an Array = ");
         int size = sc.nextInt();
 
@@ -25,31 +23,28 @@ public class SortAscDescArray {
             System.out.print(arr[i] + " ");
         }
 
-        // Sorting the first half of the array in ascending order using bubble sort
+        // Bubble Sort in ascending order
         int temp;
-        for (int i = 0; i < size / 2; i++) {
-            for (int j = 0; j < size / 2 - 1; j++) {
-                if (arr[j] > arr[j + 1]) {
-                    temp = arr[j + 1];
-                    arr[j + 1] = arr[j];
-                    arr[j] = temp;
-                }
-            }
-        }
-
-        // Sorting the second half of the array in descending order using bubble sort
-        for (int i = size / 2; i < size - 1; i++) {
-            for (int j = size / 2; j < size - 1; j++) {
-                if (arr[j] < arr[j + 1]) {
+        for (int i = 0; i < size - 1; i++) {  // Outer loop
+            boolean swapped = false;
+            // Inner loop to compare adjacent elements
+            for (int j = 0; j < size - 1 - i; j++) {  // Reduced inner loop range
+                if (arr[j] > arr[j + 1]) {  // Swap if the current element is greater than the next one
                     temp = arr[j];
                     arr[j] = arr[j + 1];
                     arr[j + 1] = temp;
+                    swapped = true;  // Mark that a swap occurred
                 }
+            }
+
+            // If no swaps were made in this pass, the array is already sorted
+            if (!swapped) {
+                break;
             }
         }
 
         // Print the sorted array
-        System.out.println("\nSorted array (first half ascending, second half descending):");
+        System.out.println("\nSorted array (in ascending order):");
         for (int i = 0; i < size; i++) {
             System.out.print(arr[i] + " ");
         }
